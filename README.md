@@ -75,3 +75,9 @@ Routes：存在与模块中的，Routes 对象由一组配置信息组成，每�
 
 
  -->
+ ## 重定向路由
+ <!-- 
+ 解决问题：一进入页面就显示home组件，但是localhost的url还是 localhost：4200 
+  
+ 
+  -->

@@ -21,7 +21,9 @@ const routes: Routes = [
   不用斜杠开头是为了在在多个视图间导航时可以自由的使用绝对路径和相对路径
   */
   // 当路由路径是 '' 是空时，展示 home 组件
-  {path: '', component: HomeComponent},
+  // 重定向路由: 当url是空字符串的时候，就匹配到home组件
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
+  {path: 'home', component: HomeComponent},
   // 当路由路径是 product时，展示 ProductComponent 组件
   {path: 'product/:id', component: ProductComponent},
   // 注意** 通配符路由一定要放在最后面
