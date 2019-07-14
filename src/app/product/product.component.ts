@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -21,7 +21,13 @@ export class ProductComponent implements OnInit {
     // this.productId = this.routeInfo.snapshot.queryParams['id'];
 
     // 第二种路由传参
-    this.productId = this.routeInfo.snapshot.params['id'];
+    // 参数快照snapshot 改为参数订阅 subscribe
+    // this.productId = this.routeInfo.snapshot.params['id'];
+    /*
+    参数订阅:
+    subscribe 订阅 params，params的类型是Params，根据拿到的params,给本地的productId 来赋值
+     */
+    this.routeInfo.params.subscribe((params: Params) => this.productId = params["id"]);
   }
 
 }
