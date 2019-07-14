@@ -1,21 +1,23 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
 
+<!--
+routerLink 链接路由到指定组件
+路由前面需要加上斜杠 / ,
+路由分为根路由和子路由
+现在写法用斜杠开头 / 表示导航到根路由，从根路由中找出匹配的组件
+ -->
+
+ <!--
+   1: 启动应用，首先展示的home组件，组件内容展示在<router-outlet> 标签后面，现在点击商品相亲连接，会把home组件替换成product组件
+   2： 为什么routerLink 的参数 是一个数组，而不是一个字符串，是因为可以在路由中传递一些参数，
+  -->
+  <!-- routerLink 改变浏览器的地址-->
+<a [routerLink]="['/']">主页</a> <br>
+<!-- 在查询参数中传递数据 -->
+<a [routerLink]="['/product']" [queryParams]="{id:1}">商品详情</a><br>
+
+<!-- 通过navegate方法来改变浏览器的地址，从而实现路由的转换， -->
+<input type="button" value="商品详情" (click)="toProductDetails()">
+<!--
+  <router-outlet> 组件要展示的位置，比如说路由导航到product时，ProductComponent组件要展示的位置就在 <router-outlet> 后面
+ -->
 <router-outlet></router-outlet>
