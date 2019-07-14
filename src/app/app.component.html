@@ -19,7 +19,11 @@ routerLink 链接路由到指定组件
 <a [routerLink]="['/product', 2]" >商品详情</a><br>
 <!-- 通过navegate方法来改变浏览器的地址，从而实现路由的转换， -->
 <input type="button" value="商品详情" (click)="toProductDetails()">
+
+ <!-- <a [routerLink]="[{outlets: {aux：'chat'}}]" >开始聊天</a> -->
+<!-- <a [routerLink]="[{outlets: {aux：null}}]" >结束聊天</a>  -->
 <!--
   <router-outlet> 组件要展示的位置，比如说路由导航到product时，ProductComponent组件要展示的位置就在 <router-outlet> 后面
  -->
 <router-outlet></router-outlet>
+<router-outlet name="aux"></router-outlet>

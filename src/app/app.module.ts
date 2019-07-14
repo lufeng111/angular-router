@@ -23,6 +23,7 @@ import { ProductComponent } from './product/product.component';
 import { Code404Component } from './code404/code404.component';
 import { ProductDescComponent } from './product-desc/product-desc.component';
 import { SellerInfoComponent } from './seller-info/seller-info.component';
+import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { SellerInfoComponent } from './seller-info/seller-info.component';
     ProductComponent,
     Code404Component,
     ProductDescComponent,
-    SellerInfoComponent
+    SellerInfoComponent,
+    ChatComponent
   ],
   // 这两个是angular框架提供的模块，
   imports: [
