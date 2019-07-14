@@ -10,6 +10,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ProductComponent } from './product/product.component';
 import { Code404Component } from './code404/code404.component';
+import { ProductDescComponent } from './product-desc/product-desc.component';
+import { SellerInfoComponent } from './seller-info/seller-info.component';
 
 /*
 Routes 属性：实际上是一组路由对象，里面最起码有两个属性，path和component
@@ -22,10 +24,17 @@ const routes: Routes = [
   */
   // 当路由路径是 '' 是空时，展示 home 组件
   // 重定向路由: 当url是空字符串的时候，就匹配到home组件
+  // 这是根路由
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
   // 当路由路径是 product时，展示 ProductComponent 组件
-  {path: 'product/:id', component: ProductComponent},
+  {path: 'product/:id', component: ProductComponent,
+  // 这是子路由
+  children: [
+    {path: '', component: ProductDescComponent},
+    {path: 'seller/:id', component: SellerInfoComponent}
+  ]
+},
   // 注意** 通配符路由一定要放在最后面
   {path: '**', component: Code404Component}
 

@@ -78,6 +78,21 @@ Routes：存在与模块中的，Routes 对象由一组配置信息组成，每�
  ## 重定向路由
  <!-- 
  解决问题：一进入页面就显示home组件，但是localhost的url还是 localhost：4200 
-  
- 
+  // 重定向路由: 当url是空字符串的时候，就匹配到home组件
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
   -->
+  ## angular router 导航的子路由
+  <!-- 
+  {path: 'home', component: HomeComponent},
+  {path: 'home', component: HomeComponent, 
+  children:[
+    {path: '', component: XxxComponent},
+    {path: '/yyy', component: YyyComponent},
+  ]
+  },
+  当路由配置好之后，访问home组件时，会展示HomeComponent组件的模板，同时home组件<outlink>位置展示XxxComponent组件的内容，
+  当访问home/yyy 时，依然会展示HomeComponent组件的模板，同时home组件<outlink>位置展示YyyComponent组件的内容，
+  注意：在app.component 中有一个<router-outlet></router-outlet> ，在product.component中也有一个 <router-outlet></router-outlet>，这样会形成插座的父子关系，这个关系可以一直没有限制的嵌套下去，
+  其次：路由信息都是在模块上的，组件本身并不知道任何路由信息，所以组件是可以放到任何地方去用的
+  
+   -->
