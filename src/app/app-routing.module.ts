@@ -15,6 +15,7 @@ import { SellerInfoComponent } from './seller-info/seller-info.component';
 import { ChatComponent } from './chat/chat.component';
 import { LoginGuard } from './guard/login.guard';
 import { UnsavedGuard } from './guard/unsaved.guard';
+import { ProductResolve } from './guard/product.resolve';
 
 /*
 Routes 属性：实际上是一组路由对象，里面最起码有两个属性，path和component
@@ -37,7 +38,12 @@ const routes: Routes = [
   children: [
     {path: '', component: ProductDescComponent},
     {path: 'seller/:id', component: SellerInfoComponent}
-  ], canActivate: [LoginGuard], canDeactivate: [UnsavedGuard]
+  ], resolve: {
+    product: ProductResolve
+  }
+  // resolve 是一个对象，传一个product属性，这个属性由ProductResolve 生成
+  // canActivate: [LoginGuard], canDeactivate: [UnsavedGuard]
+
 },
 /*
 UnsavedGuard 路由的使用方法和LoginGuard 一样，canDeactivate: [UnsavedGuard] 也是接收一个数组，这有数组中所有守卫都返回true时，才会离开当前路由，如果有一个守卫返回false 就留在当前路由,
@@ -56,7 +62,8 @@ UnsavedGuard 路由的使用方法和LoginGuard 一样，canDeactivate: [Unsaved
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [LoginGuard, UnsavedGuard],
+  // providers: [LoginGuard, UnsavedGuard],
+  providers: [ProductResolve],
 
 })
 export class AppRoutingModule { }
