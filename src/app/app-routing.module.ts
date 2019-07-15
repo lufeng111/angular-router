@@ -13,6 +13,8 @@ import { Code404Component } from './code404/code404.component';
 import { ProductDescComponent } from './product-desc/product-desc.component';
 import { SellerInfoComponent } from './seller-info/seller-info.component';
 import { ChatComponent } from './chat/chat.component';
+import { LoginGuard } from './guard/login.guard';
+import { UnsavedGuard } from './guard/unsaved.guard';
 
 /*
 Routes 属性：实际上是一组路由对象，里面最起码有两个属性，path和component
@@ -35,8 +37,17 @@ const routes: Routes = [
   children: [
     {path: '', component: ProductDescComponent},
     {path: 'seller/:id', component: SellerInfoComponent}
-  ]
+  ], canActivate: [LoginGuard], canDeactivate: [UnsavedGuard]
 },
+/*
+UnsavedGuard 路由的使用方法和LoginGuard 一样，canDeactivate: [UnsavedGuard] 也是接收一个数组，这有数组中所有守卫都返回true时，才会离开当前路由，如果有一个守卫返回false 就留在当前路由,
+ 比如当从商品详情组件返回到主页时，会有一个提示信息，点击确定之后，会跳转到主页去，点取消依赖留在当前路由中
+*/
+/*  LoginGuard 加到产品信息的路由上，先添加canActivate属性，接收一个数组，数组意思是可以添加多个路由守卫，当应用视图进入这个产品信息的路由时，
+依赖这个数组的路由守卫会被依次调用，如果其中一个路由守卫返回false,路由请求就会被拒绝掉，我们现在只有一个LoginGuard登录护卫，这里只是指定了一个路由护卫的类型LoginGuard类，
+但是谁来实例化这个路由护卫，angular会使用一个依赖注入的机制,实例化这个路由守卫，最后在这个模块的providers里面再声明一次LoginGuard,现在商品信息的路由就被这个LoginGuard守卫保护起来了
+当在主页点击商品详情，如果打印用户未登录，那么商品详情组件就不展示，如果没有打印，就正常显示
+*/
   // 注意** 通配符路由一定要放在最后面
   {path: '**', component: Code404Component}
 
@@ -44,6 +55,8 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [LoginGuard, UnsavedGuard],
+
 })
 export class AppRoutingModule { }
